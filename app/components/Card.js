@@ -1,17 +1,19 @@
 import React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, TouchableHighlight } from "react-native";
 import AppText from "./AppText/AppText.android";
 import colors from "../config/colors";
 
-const Card = ({ image, title, subtitle }) => {
+const Card = ({ image, title, subtitle, onPress }) => {
   return (
-    <View style={styles.card}>
-      <Image style={styles.cardImage} source={image} />
-      <View style={styles.cardTextContainer}>
-        <AppText style={styles.title}>{title}</AppText>
-        <AppText style={styles.subtitle}>{subtitle}</AppText>
+    <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
+      <View style={styles.card}>
+        <Image style={styles.cardImage} source={image} />
+        <View style={styles.cardTextContainer}>
+          <AppText style={styles.title}>{title}</AppText>
+          <AppText style={styles.subtitle}>{subtitle}</AppText>
+        </View>
       </View>
-    </View>
+    </TouchableHighlight>
   );
 };
 

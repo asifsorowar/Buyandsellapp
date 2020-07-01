@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, StyleSheet } from "react-native";
+import colors from "../../config/colors";
 
 const AppText = ({ children, style, ...otherProps }) => {
   return (

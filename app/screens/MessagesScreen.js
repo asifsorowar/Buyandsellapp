@@ -35,6 +35,7 @@ const MessagesScreen = () => {
       <FlatList
         data={messages}
         keyExtractor={(message) => message.id.toString()}
+        showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
           <ListItem
             title={item.title}
