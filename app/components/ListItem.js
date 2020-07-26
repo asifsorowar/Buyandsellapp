@@ -13,9 +13,10 @@ import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const ListItem = ({
-  image,
+  imageUrl,
   title,
   subTitle,
+  date,
   IconComponent,
   onPress,
   renderRightActions,
@@ -27,7 +28,9 @@ const ListItem = ({
           <TouchableNativeFeedback onPress={onPress}>
             <View style={styles.listContainer}>
               {IconComponent}
-              {image && <Image source={image} style={styles.image} />}
+              {imageUrl && (
+                <Image source={{ uri: imageUrl }} style={styles.image} />
+              )}
               <View style={styles.textContainer}>
                 <AppText style={styles.title} numberOfLines={1}>
                   {title}
@@ -38,6 +41,16 @@ const ListItem = ({
                   </AppText>
                 )}
               </View>
+              {date && (
+                <View>
+                  <AppText style={styles.subTitle}>
+                    {new Date(date).toLocaleDateString()}
+                  </AppText>
+                  <AppText style={styles.subTitle}>
+                    {new Date(date).toLocaleTimeString()}
+                  </AppText>
+                </View>
+              )}
               <MaterialCommunityIcons
                 color={colors.medium}
                 name="chevron-right"
@@ -53,13 +66,26 @@ const ListItem = ({
           <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
             <View style={styles.listContainer}>
               {IconComponent}
-              {image && <Image source={image} style={styles.image} />}
+              {imageUrl && (
+                <Image source={{ uri: imageUrl }} style={styles.image} />
+              )}
               <View style={styles.textContainer}>
                 <AppText style={styles.title}>{title}</AppText>
                 {subTitle && (
                   <AppText style={styles.subTitle}>{subTitle}</AppText>
                 )}
               </View>
+              {date && <AppText style={styles.subTitle}>{date}</AppText>}
+              {date && (
+                <View>
+                  <AppText style={styles.subTitle}>
+                    {new Date(date).toLocaleDateString()}
+                  </AppText>
+                  <AppText style={styles.subTitle}>
+                    {new Date(date).toLocaleTimeString()}
+                  </AppText>
+                </View>
+              )}
               <MaterialCommunityIcons
                 color={colors.medium}
                 name="chevron-right"

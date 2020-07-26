@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import * as Yup from "yup";
 
@@ -12,8 +12,12 @@ import Screen from "./../components/Screen";
 import CategoryPickerItem from "./../components/CategoryPickerItem";
 import FormImagePicker from "../components/forms/FormImagePicker";
 import useLocation from "../hooks/useLocation";
+import { addListing } from "../api/listingApi";
+import UploadScreen from "./UploadScreen";
 
 const ListingEditScreen = () => {
+  const [uploadVisible, setUploadVisible] = useState(false);
+  const [process, setProcess] = useState(0);
   const location = useLocation();
 
   const validateSchema = Yup.object().shape({
@@ -36,12 +40,27 @@ const ListingEditScreen = () => {
     { label: "Camera", value: 9, backgroundColor: "red", icon: "apps" },
   ];
 
-  const handleSubmit = (values) => {
-    console.log(location);
+  const handleSubmit = async (values, { resetForm, setErrors }) => {
+    setProcess(0);
+    setUploadVisible(true);
+    const response = await addListing({ ...values, location }, (process) =>
+      setProcess(process)
+    );
+    if (!response.ok) {
+      setUploadVisible(false);
+      return setErrors({ title: response.data });
+    }
+
+    resetForm();
   };
 
   return (
     <Screen style={styles.container}>
+      <UploadScreen
+        onDone={() => setUploadVisible(false)}
+        process={process}
+        visible={uploadVisible}
+      />
       <AppForm
         initialValues={{
           title: "",

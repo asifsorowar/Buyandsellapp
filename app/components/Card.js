@@ -3,11 +3,11 @@ import { View, StyleSheet, Image, TouchableHighlight } from "react-native";
 import AppText from "./AppText/AppText.android";
 import colors from "../config/colors";
 
-const Card = ({ image, title, subtitle, onPress }) => {
+const Card = ({ imageUrl, title, subtitle, onPress }) => {
   return (
     <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
       <View style={styles.card}>
-        <Image style={styles.cardImage} source={image} />
+        <Image style={styles.cardImage} source={{ uri: imageUrl }} />
         <View style={styles.cardTextContainer}>
           <AppText style={styles.title}>{title}</AppText>
           <AppText style={styles.subtitle}>{subtitle}</AppText>

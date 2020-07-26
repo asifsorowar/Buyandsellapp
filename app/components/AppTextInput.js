@@ -1,19 +1,48 @@
 import React from "react";
 import { StyleSheet, View, TextInput } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  AntDesign,
+  MaterialCommunityIcons,
+  FontAwesome,
+} from "@expo/vector-icons";
 import colors from "../config/colors";
 import defaultStyles from "../config/styles";
 
-const AppTextInput = ({ icon, width = "100%", ...otherProps }) => {
+const AppTextInput = ({
+  icon,
+  iconSet = "MaterialCommunityIcons",
+  width = "100%",
+  ...otherProps
+}) => {
   return (
     <View style={[styles.container, { width }]}>
       {icon && (
-        <MaterialCommunityIcons
-          name={icon}
-          size={20}
-          color={colors.medium}
-          style={styles.icon}
-        />
+        <>
+          {iconSet === "AntDesign" && (
+            <AntDesign
+              name={icon}
+              size={20}
+              color={colors.medium}
+              style={styles.icon}
+            />
+          )}
+          {iconSet === "MaterialCommunityIcons" && (
+            <MaterialCommunityIcons
+              name={icon}
+              size={20}
+              color={colors.medium}
+              style={styles.icon}
+            />
+          )}
+          {iconSet === "FontAwesome" && (
+            <FontAwesome
+              name={icon}
+              size={20}
+              color={colors.medium}
+              style={styles.icon}
+            />
+          )}
+        </>
       )}
       <TextInput
         placeholderTextColor={colors.medium}

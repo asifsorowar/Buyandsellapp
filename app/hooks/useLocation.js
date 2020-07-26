@@ -6,7 +6,7 @@ export default useLocation = () => {
 
   useEffect(() => {
     getLocation();
-  });
+  }, []);
 
   const getLocation = async () => {
     try {
